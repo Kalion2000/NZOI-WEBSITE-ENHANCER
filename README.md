@@ -28,7 +28,7 @@ This script completely overhauls the NZOI problems dashboard, giving it a modern
 
 ---
 
-## 2. NZOI Lite (clangd self host)
+## 2. NZOI Lite (ONLY FOR C++)
 
 This script transforms the problem page into a dedicated, split-screen development environment. It integrates a local code editor with live sample test execution, all within your browser. This is ideal for quickly testing your solutions without needing to submit them to the judge.
 
@@ -53,7 +53,7 @@ This script transforms the problem page into a dedicated, split-screen developme
 * **Resizers:** Drag the resizers between the problem description, editor, and test results panels to adjust the layout to your preference.
 * **Monaco Editor:** Use the editor to write and edit your C++ code. The script automatically saves your code to your browser's local storage for each problem.
 ---
-### How to install and setup live diagnostics
+# How to install and setup live diagnostics for C++
 
 ## 1. Install `clangd`
 
@@ -65,14 +65,14 @@ echo 'export PATH="/usr/local/opt/llvm/bin:$PATH"' >> ~/.zshrc
 source ~/.zshrc
 ```
 
-## Linux (Debian/Ubuntu)
+### Linux (Debian/Ubuntu)
 
 ```bash
 sudo apt update
 sudo apt install clangd
 ```
 
-## Windows
+### Windows
 
 1. Download LLVM for Windows from the [LLVM Releases](https://github.com/llvm/llvm-project/releases)
 2. Run installer and check "Add to PATH"
@@ -95,13 +95,13 @@ No build step needed — just download and run.
 
 ## 3. Start the Proxy Server
 
-## macOS / Linux
+### macOS / Linux
 
 ```bash
 ./lsp-ws-proxy --port 3000 --server-binary $(which clangd)
 ```
 
-## Windows
+### Windows
 
 ```bash
 lsp-ws-proxy.exe --port 3000 --server-binary "C:\Program Files\LLVM\bin\clangd.exe"
@@ -112,3 +112,4 @@ Adjust the path to `clangd.exe` if different.
 ##
 
 ##
+
