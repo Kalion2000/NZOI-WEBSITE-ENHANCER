@@ -14,6 +14,110 @@
 (async () => {
     "use strict";
 
+    const url = location.href;
+    const isHome = url === "https://train.nzoi.org.nz/";
+    const isProblem = /^https:\/\/train\.nzoi\.org\.nz\/problems\//.test(url);
+
+    if (isProblem) return;
+
+    // Basic gentle dark mode for non-home, non-problem pages
+    if (!isHome) {
+  GM_addStyle(`
+    body, html {
+      background-color: #1e1e1e !important;
+      /* tab menu base */
+ul.tab_menu li a {
+  background-color: #2a2a2a !important;
+  color: #ddd !important;
+  border: none !important;
+  padding: 8px 14px !important;
+  display: inline-block !important;
+  text-decoration: none !important;
+}
+
+/* tab hover */
+ul.tab_menu li a:hover {
+  background-color: #333 !important;
+  color: #fff !important;
+}
+/* remove weird blocky backgrounds/padding on li */
+ul.tab_menu li {
+  background: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: inline !important;
+}
+
+
+/* active tab */
+ul.tab_menu li a.selected,
+ul.tab_menu li.simple-navigation-active-leaf a {
+  background-color: #444 !important;
+  color: #fff !important;
+  font-weight: 600 !important;
+}
+
+      color: #ddd !important;
+    }
+
+    a {
+      color: #ddd !important;
+      text-decoration: none !important;
+    }
+
+    a:hover {
+      color: #fff !important;
+    }
+
+    table, td, th {
+      background-color: #1f1f1f !important;
+      color: #e0e0e0 !important;
+      border-color: #444 !important;
+    }
+
+    input, select, textarea {
+      background-color: #2c2c2c !important;
+      color: #fff !important;
+      border: 1px solid #444 !important;
+    }
+
+    ul.tab_menu {
+      background-color: #222 !important;
+      border-bottom: 1px solid #333 !important;
+    }
+
+    ul.tab_menu li {
+      background-color: #2c2c2c !important;
+      color: #ccc !important;
+    }
+
+    ul.tab_menu li a {
+      color: #ccc !important;
+      padding: 8px 12px !important;
+      display: block !important;
+    }
+
+    ul.tab_menu li a.selected,
+    ul.tab_menu li.simple-navigation-active-leaf a {
+      background-color: #444 !important;
+      color: #fff !important;
+      font-weight: bold !important;
+    }
+
+    ul.tab_menu li:hover {
+      background-color: #333 !important;
+    }
+
+    ul.tab_menu li a:hover {
+      color: #fff !important;
+    }
+  `);
+
+        return;
+    }
+
+
+
     // Wait for Puter.com library to load
     if (!window.puter) {
         const script = document.createElement("script");
