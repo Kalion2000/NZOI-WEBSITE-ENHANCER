@@ -2,7 +2,7 @@
 // @name        NZOI Dashboard Upgrade
 // @namespace   http://tampermonkey.net/
 // @version     2.0
-// @description Enhanced NZOI Dashboard with a modern UI
+// @description Enhanced NZOI Dashboard (fully fixed)
 // @match       https://train.nzoi.org.nz/*
 // @grant       GM_addStyle
 // @grant       GM_setValue
@@ -119,6 +119,9 @@
         });
         $("#cached-count").text(cachedProblems.length);
         problems = cachedProblems;
+        cachedProblems.forEach(p => p.tags.forEach(tag => allTags.add(tag)));
+        const tagSelect = $("#tag-filter").empty().append("<option>All Tags</option>");
+        Array.from(allTags).sort().forEach(tag => tagSelect.append(new Option(tag, tag)));
         updateTable();
 
         // Process uncached problems with AI
@@ -247,12 +250,6 @@
             }
             return result * (sortAscending ? 1 : -1);
         });
-
-        // Update tags filter dropdown with unique tags from the filtered set
-        allTags.clear();
-        filteredProblems.forEach(p => p.tags.forEach(tag => allTags.add(tag)));
-        const tagSelect = $("#tag-filter").empty().append("<option>All Tags</option>");
-        Array.from(allTags).sort().forEach(tag => tagSelect.append(new Option(tag, tag)));
 
         // Render table rows
         renderTableRows(filteredProblems);
